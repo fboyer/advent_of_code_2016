@@ -1,5 +1,5 @@
 defmodule AdventOfCode2016Test.NoTimeForATaxiCab do
-  use ExUnit.Case, async: true
+  use ExUnit.Case
   doctest AdventOfCode2016.NoTimeForATaxiCab
 
   import AdventOfCode2016.NoTimeForATaxiCab
@@ -42,13 +42,13 @@ defmodule AdventOfCode2016Test.NoTimeForATaxiCab do
     assert distance_to_final_location("R5, L5, R5, R3") == 12
   end
 
-  test "can solve the first puzzle" do
+  test "can solve the day 1 - puzzle 1" do
     answer =
       @input
       |> distance_to_final_location
       |> Integer.to_string
 
-    IO.puts "Answer to the first puzzle: " <> answer
+    IO.puts "Day 1 - Puzzle 1: " <> answer
   end
 
   test "can visit locations" do
@@ -69,12 +69,12 @@ defmodule AdventOfCode2016Test.NoTimeForATaxiCab do
                 {4, -4} => 1, {4, -3} => 1, {4, -2} => 1, {4, -1} => 1}}
   end
 
-  test "can solve the second puzzle" do
+  test "can solve the day 2 - puzzle 2" do
     answer =
       @input
       |> distance_to_first_location_visited_twice
       |> Integer.to_string
 
-    IO.puts "Answer to the second puzzle: " <> answer
+    IO.puts "Day 1 - Puzzle 2: " <> answer
   end
 end
