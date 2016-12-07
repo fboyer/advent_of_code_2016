@@ -27,9 +27,9 @@ defmodule AdventOfCode2016.SquaresWithThreeSides do
   def is_valid?(_), do: false
 
   def to_lines([[triangle1_side1, triangle2_side1, triangle3_side1],
-                              [triangle1_side2, triangle2_side2, triangle3_side2],
-                              [triangle1_side3, triangle2_side3, triangle3_side3]
-                              | []]) do
+                [triangle1_side2, triangle2_side2, triangle3_side2],
+                [triangle1_side3, triangle2_side3, triangle3_side3]
+                | []]) do
     [[triangle1_side1, triangle1_side2, triangle1_side3],
      [triangle2_side1, triangle2_side2, triangle2_side3],
      [triangle3_side1, triangle3_side2, triangle3_side3]]
