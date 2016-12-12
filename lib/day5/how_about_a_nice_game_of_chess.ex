@@ -25,11 +25,10 @@ defmodule AdventOfCode2016.HowAboutANiceGameOfChess do
 
     if pos < opts[:password_length] && Map.has_key?(password, pos) == false do
       new_password = Map.put(password, pos, String.at(hash, opts[:char_index]))
-      case map_size(new_password) < opts[:password_length] do
-        true ->
-          {:cont, new_password}
-        false ->
-          {:halt, new_password}
+      if map_size(new_password) < opts[:password_length] do
+        {:cont, new_password}
+      else
+        {:halt, new_password}
       end
     else
         {:cont, password}
