@@ -1,7 +1,11 @@
 defmodule AdventOfCode2016.HowAboutANiceGameOfChess do
   def generate_password(door_id, opts \\ [char_index: 5, md5_prefix: "00000", password_length: 8]) do
+    trimmed_door_id =
+      door_id
+      |> String.trim
+
     Stream.iterate(0, &(&1 + 1))
-    |> Stream.map(&generate_md5_hash(door_id, &1))
+    |> Stream.map(&generate_md5_hash(trimmed_door_id, &1))
     |> Stream.filter(&String.starts_with?(&1, opts[:md5_prefix]))
     |> Stream.map(&String.at(&1, opts[:char_index]))
     |> Stream.take(opts[:password_length])
@@ -9,8 +13,12 @@ defmodule AdventOfCode2016.HowAboutANiceGameOfChess do
   end
 
   def generate_cinematic_password(door_id, opts \\ [char_index: 6, char_pos: 5, md5_prefix: "00000", password_length: 8]) do
+    trimmed_door_id =
+      door_id
+      |> String.trim
+
     Stream.iterate(0, &(&1 + 1))
-    |> Stream.map(&generate_md5_hash(door_id, &1))
+    |> Stream.map(&generate_md5_hash(trimmed_door_id, &1))
     |> Stream.filter(&String.starts_with?(&1, opts[:md5_prefix]))
     |> Enum.reduce_while(%{}, &build_cinematic_password(&1, &2, opts))
     |> Map.values

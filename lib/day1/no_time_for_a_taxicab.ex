@@ -5,7 +5,10 @@ defmodule AdventOfCode2016.NoTimeForATaxiCab do
   @west "West"
 
   def distance_to_final_location(instructions) do
-    {_dir, {x, y}} = instructions |> final_location
+    {_dir, {x, y}} =
+      instructions
+      |> final_location
+
     abs(x) + abs(y)
   end
 
@@ -20,11 +23,15 @@ defmodule AdventOfCode2016.NoTimeForATaxiCab do
   def turn_and_move(left_or_right, dist, {current_dir, current_loc}) do
     new_dir = current_dir |> turn(left_or_right)
     new_loc = current_loc |> move(new_dir, dist)
+
     {new_dir, new_loc}
   end
 
   def distance_to_first_location_visited_twice(instructions) do
-    {_dir, {x, y}, _visited_locations} = instructions |> first_location_visited_twice
+    {_dir, {x, y}, _visited_locations} =
+      instructions
+      |> first_location_visited_twice
+
     abs(x) + abs(y)
   end
 
@@ -44,19 +51,18 @@ defmodule AdventOfCode2016.NoTimeForATaxiCab do
   def do_visit_locations(dir, 0, current_loc, visited_locations), do: {:cont, {dir, current_loc, visited_locations}}
   def do_visit_locations(dir, dist, current_loc, visited_locations) do
     new_loc = move(current_loc, dir, 1)
-    case Map.has_key?(visited_locations, new_loc) do
-      true ->
-        visited_locations = Map.put(visited_locations, new_loc, 1)
-        {:halt, {dir, new_loc, visited_locations}}
-      false ->
-        visited_locations = Map.put(visited_locations, new_loc, 1)
-        do_visit_locations(dir, dist - 1, new_loc, visited_locations)
+    if Map.has_key?(visited_locations, new_loc) do
+      visited_locations = Map.put(visited_locations, new_loc, 1)
+      {:halt, {dir, new_loc, visited_locations}}
+    else
+      visited_locations = Map.put(visited_locations, new_loc, 1)
+      do_visit_locations(dir, dist - 1, new_loc, visited_locations)
     end
   end
 
   def parse_instructions(instructions) do
     instructions
-    |> String.split(", ")
+    |> String.split([", ", "\n"], trim: true)
     |> Enum.map(&String.graphemes/1)
     |> Enum.map(fn [left_or_right | dist] -> {left_or_right, dist |> Enum.join |> String.to_integer} end)
   end

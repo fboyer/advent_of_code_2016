@@ -4,9 +4,7 @@ defmodule AdventOfCode2016.HowAboutANiceGameOfChessTest do
 
   import AdventOfCode2016.HowAboutANiceGameOfChess
 
-  @input "ffykfhsq"
-
-  describe "Day 5 - Part 1" do
+  describe "day 5 - part 1" do
     test "can generate the md5 hash" do
       assert md5("abc3231929") == "00000155f8105dff7f56ee10fa9b9abd"
       assert md5("abc5017308") == "000008f82c5b3924a1ecbebf60344e00"
@@ -19,16 +17,16 @@ defmodule AdventOfCode2016.HowAboutANiceGameOfChessTest do
     end
 
     @tag long_running: true
-    test "can solve the day 5 - puzzle 1" do
+    test "can solve the day 5 - part 1" do
       answer =
-        @input
+        File.read!("test/day5/day5.txt")
         |> generate_password
 
-        IO.puts "Day 5 - Puzzle 1: " <> answer
-      end
+        IO.puts "day 5 - part 1: #{answer}"
+    end
   end
 
-  describe "Day 5 - Part 2" do
+  describe "day 5 - part 2" do
     @tag long_running: true
     test "can generate a cinematic password for a door id" do
       assert generate_cinematic_password("abc") == "05ace8e3"
@@ -36,12 +34,12 @@ defmodule AdventOfCode2016.HowAboutANiceGameOfChessTest do
 
     @tag timeout: 120000
     @tag long_running: true
-    test "can solve the day 5 - puzzle 2" do
+    test "can solve the day 5 - part 2" do
       answer =
-        @input
+        File.read!("test/day5/day5.txt")
         |> generate_cinematic_password
 
-        IO.puts "Day 5 - Puzzle 2: " <> answer
-      end
+        IO.puts "day 5 - part 2: #{answer}"
+    end
   end
 end

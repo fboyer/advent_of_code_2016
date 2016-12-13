@@ -13,6 +13,7 @@ defmodule AdventOfCode2016.SecurityThroughObscurity do
 
   def parse_room(room) do
     [encrypted_name, sector_id, checksum] = Regex.run(~r/(.+)-(\d+)\[(.+)\]/, room, capture: :all_but_first)
+    
     {encrypted_name, String.to_integer(sector_id), checksum}
   end
 
